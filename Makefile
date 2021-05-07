@@ -15,13 +15,15 @@
 CXX = g++
 
 # C pre-processor flags
-CPPFLAGS = -I/home/013/s/sq/sqn170000/local
+CPPFLAGS = -I ~/include
 
 # compiler flags
 CXXFLAGS = -Werror
 
 # linker flags
-LDFLAGS = -L/home/013/s/sq/sqn170000/lib -lrudeconfig
+LDFLAGS = -static -L /home/013/s/sq/sqn170000/lib
+
+LDLIBS = -l rudeconfig
 
 # Project name.  This is used in building the file name for the backup target
 PROJECTNAME = 6_assign
@@ -54,7 +56,7 @@ clean:
 
 
 $(EXEC): $(OBJS)
-	$(CXX) -o $(EXEC) $(LDFLAGS) $(OBJS)
+	$(CXX) -static -o $(EXEC) $(OBJS) $(LDFLAGS) $(LDLIBS)
 
 
 Makefile: $(SRCS:.cc=.d)
