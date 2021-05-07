@@ -1,9 +1,3 @@
-// login.cpp
-// Prompts for Username and Password
-// Validates the user and returns the role of the user
-//
-//////////////////////////////////////
-
 #include <iostream>
 #include <string>
 #include <map>
