@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 	// TCLAP parse command line
 	map<int, string> optionMap = parseCMD(argc, argv);
 
-	// create a Config object
+	// create a Config object and fill optionMap with configs
 	Config config = parseConfig(optionMap);
 
 	cout << optionMap[verbose] << endl;
