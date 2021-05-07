@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
     cmd.add(configArg);
     cmd.parse(argc, argv); 
 
+	// Create map to hold TCLAP and RudeConfig stuff
     map<int, string> optionMap;
 	optionMap[daemon] = daemonSwitch.getValue() ? "true" : "false";
     optionMap[config_filename] = configArg.getValue();
@@ -30,7 +31,6 @@ int main(int argc, char* argv[])
 
 	// create a Config object
 	Config config;
-
 
 	// Load the parameters config file
 	if(config.load(optionMap[config_filename].c_str())){
@@ -53,11 +53,9 @@ int main(int argc, char* argv[])
 			cerr << "Config file is missing one or more definitions." << endl;
 			return 1;
 		}
-
 	}
 	else{
 		// loading the login config file failed
-		//
 		cout << "Error loading config file: " << config.getError() << endl;
 		return 1;
 	}
