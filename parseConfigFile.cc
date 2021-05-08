@@ -22,7 +22,7 @@ rude::Config parseConfig(std::map<int,std::string> &optionMap){
 		&& config.exists("NumVersions")
 		&& config.exists("WatchDir")){
 			optionMap[verbose] = config.getStringValue("Verbose");
-			optionMap[logfile] = config.getStringValue("LogFile");
+			optionMap[logfile_filename] = config.getStringValue("LogFile");
 			optionMap[password] = config.getStringValue("Password");
 			optionMap[numVersions] = config.getStringValue("NumVersions");
 			optionMap[watchdir] = config.getStringValue("WatchDir");
