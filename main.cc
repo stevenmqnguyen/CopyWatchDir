@@ -13,6 +13,7 @@
 #include "parseConfigFile.h"
 #include "loggingFunctions.h"
 #include "processControl.h"
+#include "globals.h"
 
 using namespace std;
 using namespace rude;
@@ -21,10 +22,10 @@ using namespace TCLAP;
 int main(int argc, char* argv[])
 {
 	// TCLAP parse command line
-	map<int, string> optionMap = parseCMD(argc, argv);
+	g_optionMap = parseCMD(argc, argv);
 
 	// create a Config object and fill optionMap with configs
-	Config config = parseConfig(optionMap);
+	g_config = parseConfig(g_optionMap);
 	
 	// run program with fork
 	// if(optionMap[daemon_value].compare("true") == 0){
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
 	// 	cout << "This is running without any daemons" << endl;
 		
 	// }
-	processControl(optionMap);
+	processControl();
 
     return 0;
 }

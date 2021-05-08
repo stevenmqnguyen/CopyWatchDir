@@ -3,8 +3,8 @@
 #include<string>
 #include<map>
 
-int processControl(std::map<int,std::string> &optionMap);
-int childProcess(std::map<int,std::string> &optionMap);
+int processControl();
+int childProcess();
 int parentProcess();
 int defaultProcess();
 
