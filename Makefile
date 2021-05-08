@@ -18,7 +18,7 @@ CXX = g++
 CPPFLAGS = -I ~/include
 
 # compiler flags
-CXXFLAGS = -Werror
+CXXFLAGS = -Werror -Wall
 
 # linker flags
 LDFLAGS = -static -L /home/013/s/sq/sqn170000/lib
