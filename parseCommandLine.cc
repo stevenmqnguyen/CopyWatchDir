@@ -17,7 +17,7 @@ map<int,string> parseCMD(int argc, char* argv[]){
 
 	// Create map to hold TCLAP and RudeConfig stuff
     map<int, string> optionMap;
-	optionMap[daemon] = daemonSwitch.getValue() ? "true" : "false";
+	optionMap[daemon_value] = daemonSwitch.getValue() ? "true" : "false";
     optionMap[config_filename] = configArg.getValue();
 
     return optionMap;
