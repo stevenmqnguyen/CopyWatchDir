@@ -4,11 +4,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <fstream>
+#include <sys/stat.h>
 #include "rude/config.h"
 #include "tclap/CmdLine.h"
 #include "enum.h"
 #include "parseCommandLine.h"
 #include "parseConfigFile.h"
+#include "loggingFunctions.h"
 
 using namespace std;
 using namespace rude;
@@ -34,7 +37,15 @@ int main(int argc, char* argv[])
 		// Child process
 		else if(forkvalue == 0){
 			cout << "This is the child process running!" << endl;
-			exit(0);
+			if(PIDFileExists("cs3377dirmond.pid")){
+				exit(1);
+			}
+			ofstream pidfile("cs3377dirmond.pid");
+			pidfile << getpid() << endl;
+			int i = 1;
+			while(true){
+				i++;
+			}
 		}
 		// Parent process
 		else{
@@ -46,6 +57,7 @@ int main(int argc, char* argv[])
 	// Run program non daemon style (no forking)
 	else{
 		cout << "This is running without any daemons" << endl;
+		
 	}
 
 
