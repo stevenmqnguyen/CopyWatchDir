@@ -2,6 +2,8 @@
 #include <string>
 #include <map>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 #include "rude/config.h"
 #include "tclap/CmdLine.h"
 #include "enum.h"
@@ -19,12 +21,34 @@ int main(int argc, char* argv[])
 
 	// create a Config object and fill optionMap with configs
 	Config config = parseConfig(optionMap);
+	
+	// run program with fork
+	if(optionMap[daemon_value].compare("true") == 0){
+		pid_t forkvalue = fork();
 
-	cout << optionMap[verbose] << endl;
-	cout << optionMap[logfile] << endl;
-	cout << optionMap[password] << endl;
-	cout << optionMap[numVersions] << endl;
-	cout << optionMap[watchdir] << endl;
+		// Error, no child created
+		if(forkvalue == -1){
+			cerr << "Error in fork. No child created." << endl;
+			exit(1);
+		}
+		// Child process
+		else if(forkvalue == 0){
+			cout << "This is the child process running!" << endl;
+			exit(0);
+		}
+		// Parent process
+		else{
+			cout << "This is the parent process running! Child PID: " << forkvalue << endl;
+			exit(0);
+		}
+
+	}
+	// Run program non daemon style (no forking)
+	else{
+		cout << "This is running without any daemons" << endl;
+	}
+
+
     return 0;
 }
 
