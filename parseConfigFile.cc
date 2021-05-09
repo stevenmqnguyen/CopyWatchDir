@@ -27,12 +27,10 @@ void parseConfig(){
 			g_optionMap[password] = config.getStringValue("Password");
 			g_optionMap[numVersions] = config.getStringValue("NumVersions");
 			string dir = config.getStringValue("WatchDir");
-			cout << dir << endl;
 			size_t pos = dir.find_last_of("/");
 			if(pos == dir.length()-1){
     			dir.erase(dir.length()-1);
 			}
-			cout << dir << endl;
 			g_optionMap[watchdir] = dir;
 		}
 		else{
