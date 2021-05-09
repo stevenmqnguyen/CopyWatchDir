@@ -4,6 +4,7 @@
 #include "enum.h"
 #include "globals.h"
 #include "parseConfigFile.h"
+#include "loggingFunctions.h"
 
 using namespace std;
 
@@ -14,7 +15,9 @@ void signalHandler( int signum ){
             g_logfile << "Closed due to signal: " << (signum == SIGINT ? "SIGINT" : "SIGTERM") << endl;
         }
         g_logfile.close();
-        system("rm cs3377dirmond.pid");
+        if(PIDFileExists("./cs3377dirmond.pid")){
+            system("rm ./cs3377dirmond.pid");
+        }
         exit(0); 
     }
     else if(signum == SIGHUP){

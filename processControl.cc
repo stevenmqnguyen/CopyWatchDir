@@ -50,17 +50,17 @@ int childProcess(){
     // Create logfile
     g_logfile.open(g_optionMap[logfile_filename].c_str(), std::ios_base::app);
     cout << "This is the child process running!" << endl;
-    if(PIDFileExists("cs3377dirmond.pid")){
+    if(PIDFileExists("./cs3377dirmond.pid")){
         g_logfile << "cs3377dirmond.pid already exists.\nOnly one cs3377dirmond is able to run at a time. \nexiting." << endl;
         exit(1);
     }
-    g_pidfile.open("cs3377dirmond.pid");
+    g_pidfile.open("./cs3377dirmond.pid");
     g_pidfile << getpid() << endl;
 
     start_inotify();
 
     g_pidfile.close();
-    system("rm cs3377dirmond.pid");
+    system("rm ./cs3377dirmond.pid");
     g_logfile.close();
     exit(0);
     return 0;
