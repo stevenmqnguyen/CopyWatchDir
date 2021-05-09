@@ -26,7 +26,14 @@ void parseConfig(){
 			g_optionMap[logfile_filename] = config.getStringValue("LogFile");
 			g_optionMap[password] = config.getStringValue("Password");
 			g_optionMap[numVersions] = config.getStringValue("NumVersions");
-			g_optionMap[watchdir] = config.getStringValue("WatchDir");
+			string dir = config.getStringValue("WatchDir");
+			cout << dir << endl;
+			size_t pos = dir.find_last_of("/");
+			if(pos == dir.length()-1){
+    			dir.erase(dir.length()-1);
+			}
+			cout << dir << endl;
+			g_optionMap[watchdir] = dir;
 		}
 		else{
 			cerr << "Config file is missing one or more definitions." << endl;
