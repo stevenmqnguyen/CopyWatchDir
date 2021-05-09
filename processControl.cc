@@ -12,6 +12,7 @@
 #include "enum.h"
 #include "rude/config.h"
 #include "globals.h"
+#include "inotifyFunctions.h"
 
 using namespace std;
 using namespace rude;
@@ -56,10 +57,7 @@ int childProcess(){
     g_pidfile.open("cs3377dirmond.pid");
     g_pidfile << getpid() << endl;
 
-    int i=1;
-    while(true){
-        i++;
-    }
+    start_inotify();
 
     g_pidfile.close();
     system("rm cs3377dirmond.pid");
@@ -75,6 +73,9 @@ int parentProcess(){
 }
 
 int defaultProcess(){
+    g_logfile.open(g_optionMap[logfile_filename].c_str(), std::ios_base::app);
     cout << "This is running without any daemons" << endl;
+    start_inotify();
+    g_logfile.close();
     return 0;
 }
