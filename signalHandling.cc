@@ -18,7 +18,7 @@ void signalHandler( int signum ){
         exit(0); 
     }
     else if(signum == SIGHUP){
-        g_config = reparseConfig();
+        reparseConfig();
         if(g_optionMap[verbose].compare("true") == 0){
             g_logfile << "Reparsed config file due to signal: SIGHUP" << endl;
             g_logfile << "daemon_value: " << g_optionMap[daemon_value];

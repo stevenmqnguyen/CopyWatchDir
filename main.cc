@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	g_optionMap = parseCMD(argc, argv);
 
 	// create a Config object and fill optionMap with configs
-	g_config = parseConfig();
+	parseConfig();
 	
 	
 	processControl();

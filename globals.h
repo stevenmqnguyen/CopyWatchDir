@@ -8,7 +8,6 @@
 using namespace std;
 using namespace rude;
 extern map<int, string> g_optionMap;
-extern Config g_config;
 extern ofstream g_logfile;
 extern ofstream g_pidfile;
 

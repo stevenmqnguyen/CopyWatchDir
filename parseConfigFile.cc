@@ -10,7 +10,7 @@
 using namespace std;
 using namespace rude;
 
-rude::Config parseConfig(){
+void parseConfig(){
     Config config;
 	if(config.load(g_optionMap[config_filename].c_str())){
 		if(!config.setSection("Parameters", false)){
@@ -38,9 +38,8 @@ rude::Config parseConfig(){
 		cout << "Error loading config file: " << config.getError() << endl;
         exit(1);
 	}
-    return config;
 }
-rude::Config reparseConfig(){
+void reparseConfig(){
     Config config;
 	if(config.load(g_optionMap[config_filename].c_str())){
 		if(!config.setSection("Parameters", false)){
@@ -68,5 +67,4 @@ rude::Config reparseConfig(){
 		cout << "Error loading config file: " << config.getError() << endl;
         exit(1);
 	}
-    return config;
 }

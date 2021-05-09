@@ -1,7 +1,7 @@
 #ifndef __PARSECONFIGFILE__
 #define __PARSECONFIGFILE__
 
-rude::Config parseConfig();
-rude::Config reparseConfig();
+void parseConfig();
+void reparseConfig();
 
 #endif //__PARSECONFIGFILE__
