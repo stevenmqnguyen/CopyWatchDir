@@ -42,7 +42,7 @@ void parseConfig(){
 	}
 	else{
 		// loading the config file failed
-		cout << "Error loading config file: " << config.getError() << endl;
+		cerr << "Error loading config file: " << config.getError() << endl;
         exit(1);
 	}
 }
@@ -71,7 +71,7 @@ void reparseConfig(){
 	}
 	else{
 		// loading the config file failed
-		cout << "Error loading config file: " << config.getError() << endl;
+		cerr << "Error loading config file: " << config.getError() << endl;
         exit(1);
 	}
 }

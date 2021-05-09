@@ -49,7 +49,9 @@ int processControl(){
 int childProcess(){
     // Create logfile
     g_logfile.open(g_optionMap[logfile_filename].c_str(), std::ios_base::app);
-    cout << "This is the child process running!" << endl;
+    if(g_optionMap[verbose].compare("true") == 0){
+        g_logfile << "Childproccess has commenced..." << endl;    
+    }
     if(PIDFileExists("./cs3377dirmond.pid")){
         g_logfile << "cs3377dirmond.pid already exists.\nOnly one cs3377dirmond is able to run at a time. \nexiting." << endl;
         exit(1);
@@ -74,14 +76,15 @@ int childProcess(){
 }
 
 int parentProcess(){
-    cout << "This is the parent process running! " << endl;
     exit(0);
     return 0;
 }
 
 int defaultProcess(){
     g_logfile.open(g_optionMap[logfile_filename].c_str(), std::ios_base::app);
-    cout << "This is running without any daemons" << endl;
+    if(g_optionMap[verbose].compare("true") == 0){
+        g_logfile << "Running program without any daemons" << endl;
+    }
     if(!dirExists(g_optionMap[versionsDir].c_str())){
         // create .versions folder
         g_logfile << ".versions folder doesn't exist, creating..." << endl;

@@ -30,11 +30,7 @@ int start_inotify(){
 
     int len = BUF_LEN;
     ssize_t ret;
-    cout << "Before while loop" << endl;
     while (len != 0 && (ret = read (fd, buf, len)) != 0) {
-        cout << "inside while loop" << endl;
-        cout << "ret: " << ret << endl;
-        cout << "len: " << len << endl;
         if (ret == -1) {
             if (errno == EINTR)
             continue;
@@ -46,11 +42,9 @@ int start_inotify(){
             if(event->mask & IN_CLOSE_WRITE){
                 if(event->mask & IN_ISDIR){
                     g_logfile << "The directory " << event->name << " was written and closed" << endl;
-                    cout << "The directory " << event->name << " was written and closed" << endl;
                 }
                 else{
                     g_logfile << "The file " << event->name << " was written and closed" << endl;
-                    cout << "The file " << event->name << " was written and closed" << endl;
                     copyToVersions(event->name);
                 }
             }
