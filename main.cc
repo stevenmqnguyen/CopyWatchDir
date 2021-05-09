@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	// TCLAP parse command line
 	g_optionMap = parseCMD(argc, argv);
 
-	// create a Config object and fill optionMap with configs
+	// fill g_optionMap with configs
 	parseConfig();
 	
 	
