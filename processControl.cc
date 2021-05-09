@@ -57,6 +57,11 @@ int childProcess(){
     g_pidfile.open("./cs3377dirmond.pid");
     g_pidfile << getpid() << endl;
 
+    if(!dirExists((g_optionMap[watchdir]+".versions").c_str())){
+        // create .versions folder
+        cout << "versionfolder doesn't exist" << endl;
+    }
+
     start_inotify();
 
     g_pidfile.close();
@@ -75,6 +80,11 @@ int parentProcess(){
 int defaultProcess(){
     g_logfile.open(g_optionMap[logfile_filename].c_str(), std::ios_base::app);
     cout << "This is running without any daemons" << endl;
+    if(!dirExists((g_optionMap[watchdir]+"/.versions").c_str())){
+        // create .versions folder
+        cout << "versionfolder doesn't exist" << endl;
+    }
+
     start_inotify();
     g_logfile.close();
     return 0;
