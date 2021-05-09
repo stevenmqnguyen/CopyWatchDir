@@ -14,7 +14,6 @@
 #define BUF_LEN (1024*(EVENT_SIZE+16))
 
 int start_inotify(){
-    // int length, i = 0;
     int fd;
     int wd;
     char* buf = new char[BUF_LEN];
@@ -26,31 +25,7 @@ int start_inotify(){
     }
 
     wd = inotify_add_watch(fd, g_optionMap[watchdir].c_str(), IN_CLOSE_WRITE);
-    //length = read(fd, buffer, BUF_LEN);
 
-    // if(length < 0){
-    //     g_logfile << "failed read" << endl;
-    // }
-
-    // while(i<length){
-    //     struct inotify_event *event = (struct inotify_event *) &buffer[i];
-    //     if(event->len){
-    //         if(event->mask & IN_CLOSE_WRITE){
-    //             if(event->mask & IN_ISDIR){
-    //                 g_logfile << "The directory " << event->name << " was written and closed" << endl;
-    //                 cout << "The directory " << event->name << " was written and closed" << endl;
-
-    //             }
-    //             else{
-    //                 g_logfile << "The file " << event->name << " was written and closed" << endl;
-    //                 cout << "The file " << event->name << " was written and closed" << endl;
-
-    //             }
-
-    //         }
-    //     }
-    //     i += EVENT_SIZE + event->len;
-    // }
     int len = BUF_LEN;
     ssize_t ret;
     cout << "Before while loop" << endl;
