@@ -13,6 +13,8 @@
 #define EVENT_SIZE (sizeof(struct inotify_event))
 #define BUF_LEN (1024*(EVENT_SIZE+16))
 
+#define BUFFER_SIZE 1024
+
 int start_inotify(){
     int fd;
     int wd;
@@ -49,6 +51,7 @@ int start_inotify(){
                 else{
                     g_logfile << "The file " << event->name << " was written and closed" << endl;
                     cout << "The file " << event->name << " was written and closed" << endl;
+                    copyToVersions(event->name);
                 }
             }
         }
@@ -62,3 +65,29 @@ int start_inotify(){
 
     return 0;
 }
+
+std::string create_timestamp_filename(std::string filename){
+    string timestamp;
+    FILE *output_from_command;
+    char tmpbuffer[BUFFER_SIZE];
+    char *line_p;
+    output_from_command = popen("date +\".%y.%m.%d-%H:%M:%S\"", "r");
+    if(!output_from_command) return "";
+    line_p = fgets(tmpbuffer, BUFFER_SIZE, output_from_command);
+    while(line_p != NULL){
+        timestamp = timestamp + line_p;
+        line_p = fgets(tmpbuffer, BUFFER_SIZE, output_from_command);
+    }
+    pclose(output_from_command);
+    
+    return filename+timestamp;
+}
+
+int copyToVersions(std::string filename){
+    string sourcePath = g_optionMap[watchdir] + "/"+filename;
+    string destPath = g_optionMap[versionsDir] + "/" + create_timestamp_filename(filename);
+    string command = "cp " + sourcePath + " " + destPath;
+    system(command.c_str());
+    return 0; 
+}
+
