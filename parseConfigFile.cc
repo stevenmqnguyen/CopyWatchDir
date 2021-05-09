@@ -32,6 +32,8 @@ void parseConfig(){
     			dir.erase(dir.length()-1);
 			}
 			g_optionMap[watchdir] = dir;
+			dir = g_optionMap[watchdir]+"/.versions";
+			g_optionMap[versionsDir] = dir;
 		}
 		else{
 			cerr << "Config file is missing one or more definitions." << endl;
