@@ -65,7 +65,9 @@ int childProcess(){
     start_inotify();
 
     g_pidfile.close();
-    system("rm ./cs3377dirmond.pid");
+    if(PIDFileExists("./cs3377dirmond.pid")){
+        system("rm ./cs3377dirmond.pid");
+    } 
     g_logfile.close();
     exit(0);
     return 0;
